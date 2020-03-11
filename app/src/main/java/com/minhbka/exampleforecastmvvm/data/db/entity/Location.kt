@@ -1,4 +1,4 @@
-package com.minhbka.exampleforecastmvvm.data.response
+package com.minhbka.exampleforecastmvvm.data.db.entity
 
 
 import com.google.gson.annotations.SerializedName
