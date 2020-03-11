@@ -1,9 +1,8 @@
 package com.minhbka.exampleforecastmvvm.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import com.minhbka.exampleforecastmvvm.data.db.Converters
 import com.minhbka.exampleforecastmvvm.data.db.CurrentWeatherDao
 import com.minhbka.exampleforecastmvvm.data.db.entity.CurrentWeatherEntry
 
@@ -11,6 +10,7 @@ import com.minhbka.exampleforecastmvvm.data.db.entity.CurrentWeatherEntry
     entities = [CurrentWeatherEntry::class],
     version = 1
 )
+@TypeConverters(Converters::class)
 abstract class ForecastDatabase : RoomDatabase(){
     abstract fun currentWeatherDao():CurrentWeatherDao
     companion object{
@@ -20,7 +20,7 @@ abstract class ForecastDatabase : RoomDatabase(){
             instance ?: Room.databaseBuilder(context.applicationContext, ForecastDatabase::class.java, "forecast.db").build().also {
                     instance = it
                 }
-            
+
         }
     }
 }
