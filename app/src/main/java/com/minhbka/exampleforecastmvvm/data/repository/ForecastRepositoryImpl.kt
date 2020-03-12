@@ -42,7 +42,7 @@ class ForecastRepositoryImpl (
     }
 
     private suspend fun fetchCurrentWeather(){
-        weatherNetworkDataSource.fetchCurrentWeather("Hanoi")
+        weatherNetworkDataSource.fetchCurrentWeather("Seoul")
     }
 
     private fun isFetchCurrentNeeded(lastFetchTime:ZonedDateTime):Boolean{
