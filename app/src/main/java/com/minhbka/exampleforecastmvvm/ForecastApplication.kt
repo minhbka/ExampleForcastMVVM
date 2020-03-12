@@ -1,7 +1,9 @@
 package com.minhbka.exampleforecastmvvm
 
 import android.app.Application
+import android.content.Context
 import androidx.preference.PreferenceManager
+import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.minhbka.exampleforecastmvvm.data.db.CurrentWeatherDao
 import com.minhbka.exampleforecastmvvm.data.db.ForecastDatabase
@@ -30,7 +32,8 @@ class ForecastApplication:Application(), KodeinAware {
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { WeatherInterfaceApiService(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
-        bind<LocationProvider>() with singleton { LocationProviderImpl()  }
+        bind() from provider {LocationServices.getFusedLocationProviderClient(instance<Context>())  }
+        bind<LocationProvider>() with singleton { LocationProviderImpl(instance(), instance())  }
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance()) }
         bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
         bind() from provider {CurrentWeatherViewModelFactory(instance(), instance())}
