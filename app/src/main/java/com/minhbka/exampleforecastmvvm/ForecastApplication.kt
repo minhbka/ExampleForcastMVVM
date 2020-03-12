@@ -1,10 +1,13 @@
 package com.minhbka.exampleforecastmvvm
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.minhbka.exampleforecastmvvm.data.db.CurrentWeatherDao
 import com.minhbka.exampleforecastmvvm.data.db.ForecastDatabase
 import com.minhbka.exampleforecastmvvm.data.db.network.*
+import com.minhbka.exampleforecastmvvm.data.provider.UnitProvider
+import com.minhbka.exampleforecastmvvm.data.provider.UnitProviderImpl
 import com.minhbka.exampleforecastmvvm.data.repository.ForecastRepository
 import com.minhbka.exampleforecastmvvm.data.repository.ForecastRepositoryImpl
 import com.minhbka.exampleforecastmvvm.ui.weather.current.CurrentWeatherViewModelFactory
@@ -25,12 +28,14 @@ class ForecastApplication:Application(), KodeinAware {
         bind() from singleton { WeatherInterfaceApiService(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
-        bind() from provider {CurrentWeatherViewModelFactory(instance())}
+        bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
+        bind() from provider {CurrentWeatherViewModelFactory(instance(), instance())}
     }
 
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
     }
 
 }
