@@ -1,4 +1,4 @@
-package com.minhbka.exampleforecastmvvm.data.network.response
+package com.minhbka.exampleforecastmvvm.data.db.network.response
 
 import com.google.gson.annotations.SerializedName
 import com.minhbka.exampleforecastmvvm.data.db.entity.CurrentWeatherEntry

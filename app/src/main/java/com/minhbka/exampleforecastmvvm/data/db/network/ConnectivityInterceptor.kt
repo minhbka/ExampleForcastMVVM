@@ -1,4 +1,4 @@
-package com.minhbka.exampleforecastmvvm.data.network
+package com.minhbka.exampleforecastmvvm.data.db.network
 
 import okhttp3.Interceptor
 

@@ -1,14 +1,13 @@
-package com.minhbka.exampleforecastmvvm.data.network
+package com.minhbka.exampleforecastmvvm.data.db.network
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.minhbka.exampleforecastmvvm.data.WeatherInterfaceApiService
-import com.minhbka.exampleforecastmvvm.data.network.response.CurrentWeatherResponse
+import com.minhbka.exampleforecastmvvm.data.db.network.response.CurrentWeatherResponse
 import com.minhbka.exampleforecastmvvm.internal.NoConnectivityException
 
 class WeatherNetworkDataSourceImpl (
-    private val weatherApiService:WeatherInterfaceApiService
+    private val weatherApiService: WeatherInterfaceApiService
 ): WeatherNetworkDataSource {
     private val _downloadedCurrentWeather = MutableLiveData<CurrentWeatherResponse>()
     override val downloadCurrentWeather: LiveData<CurrentWeatherResponse>

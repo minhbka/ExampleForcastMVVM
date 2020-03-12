@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 
 import com.minhbka.exampleforecastmvvm.R
-import com.minhbka.exampleforecastmvvm.data.WeatherInterfaceApiService
-import com.minhbka.exampleforecastmvvm.data.network.ConnectivityInterceptorImpl
-import com.minhbka.exampleforecastmvvm.data.network.WeatherNetworkDataSourceImpl
+import com.minhbka.exampleforecastmvvm.data.db.network.WeatherInterfaceApiService
+import com.minhbka.exampleforecastmvvm.data.db.network.ConnectivityInterceptorImpl
+import com.minhbka.exampleforecastmvvm.data.db.network.WeatherNetworkDataSourceImpl
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -34,7 +34,8 @@ class CurrentWeatherFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
 
 
-        val apiService = WeatherInterfaceApiService(ConnectivityInterceptorImpl(this.context!!))
+        val apiService =
+            WeatherInterfaceApiService(ConnectivityInterceptorImpl(this.context!!))
         val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
         weatherNetworkDataSource.downloadCurrentWeather.observe(this, Observer {
             textView.text = it.toString()
