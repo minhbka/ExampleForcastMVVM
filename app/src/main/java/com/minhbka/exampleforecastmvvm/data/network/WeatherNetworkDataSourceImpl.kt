@@ -7,9 +7,9 @@ import com.minhbka.exampleforecastmvvm.data.WeatherInterfaceApiService
 import com.minhbka.exampleforecastmvvm.data.network.response.CurrentWeatherResponse
 import com.minhbka.exampleforecastmvvm.internal.NoConnectivityException
 
-class WeatherNetworkDataSounceImpl (
+class WeatherNetworkDataSourceImpl (
     private val weatherApiService:WeatherInterfaceApiService
-): WeatherNetworkDataSounce {
+): WeatherNetworkDataSource {
     private val _downloadedCurrentWeather = MutableLiveData<CurrentWeatherResponse>()
     override val downloadCurrentWeather: LiveData<CurrentWeatherResponse>
         get() = _downloadedCurrentWeather

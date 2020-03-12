@@ -5,13 +5,13 @@ import androidx.room.ColumnInfo
 data class MetricCurrentWeatherEntry (
     @ColumnInfo(name = "temperature")
     override val temperature: Double,
-    @ColumnInfo(name = "weather_descriptions")
+    @ColumnInfo(name = "weatherDescriptions")
     override val conditionText: String,
-    @ColumnInfo(name = "weather_icons")
+    @ColumnInfo(name = "weatherIcons")
     override val conditionIconUrl: String,
-    @ColumnInfo(name = "wind_speed")
+    @ColumnInfo(name = "windSpeed")
     override val windSpeed: Double,
-    @ColumnInfo(name = "wind_dir")
+    @ColumnInfo(name = "windDir")
     override val windDirection: String,
     @ColumnInfo(name = "precip")
     override val precipitationVolume: Double,
