@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
 import com.minhbka.exampleforecastmvvm.R
 import com.minhbka.exampleforecastmvvm.internal.glide.GlideApp
 import com.minhbka.exampleforecastmvvm.ui.base.ScopeFragment
@@ -45,13 +44,14 @@ class CurrentWeatherFragment : ScopeFragment(), KodeinAware {
 
     private fun bindUI() = launch {
         val currentWeather = viewModel.weather.await()
+        val weatherLocation = viewModel.weatherLocation.await()
         currentWeather.observe(this@CurrentWeatherFragment, Observer {
 
             if(it == null) return@Observer
 
             Log.d("Weather", "CurrentWeather: $it")
             group_loading.visibility = View.GONE
-            updateLocation("Seoul")
+
             updateDateToToday()
             updateTemperatures(it.temperature, it.feelsLikeTemperature)
             updateCondition(it.conditionText)
@@ -62,9 +62,11 @@ class CurrentWeatherFragment : ScopeFragment(), KodeinAware {
                 .load(it.conditionIconUrl)
                 .into(imageView_condition_icon)
 
+        })
 
-
-
+        weatherLocation.observe(this@CurrentWeatherFragment, Observer {location ->
+            if(location == null) return@Observer
+            updateLocation(location.name)
         })
     }
 
