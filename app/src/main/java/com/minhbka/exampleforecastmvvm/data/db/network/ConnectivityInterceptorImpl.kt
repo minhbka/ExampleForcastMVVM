@@ -1,4 +1,4 @@
-package com.minhbka.exampleforecastmvvm.data.network
+package com.minhbka.exampleforecastmvvm.data.db.network
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -6,7 +6,6 @@ import android.net.NetworkCapabilities
 import com.minhbka.exampleforecastmvvm.internal.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.io.IOException
 
 class ConnectivityInterceptorImpl (
     context: Context
